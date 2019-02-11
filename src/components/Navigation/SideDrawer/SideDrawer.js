@@ -6,6 +6,7 @@ import BackDrop from '../../UI/Backdrop/Backdrop';
 import Auxiliary from '../../../hoc/Auxiliary';
 
 import classes from './SideDrawer.css';
+import LanguageToggle from '../../UI/LanguageToggle/languageToggle';
 
 const sideDrawer = (props) => {
     let attachedClasses = [classes.SideDrawer, classes.Close];

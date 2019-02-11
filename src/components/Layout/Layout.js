@@ -6,11 +6,33 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 import { connect } from 'react-redux'
 
+import { renderToStaticMarkup } from "react-dom/server";
+import { withLocalize, setActiveLanguage } from 'react-localize-redux';
+import translation from '../../shared/translation.json';
+
+import NewField from '../../containers/Fields/NewField/NewField';
+import Fields from '../../containers/Fields/Fields';
 
 class Layout extends Component {
+    constructor(props) {
+        super(props);
+        this.props.initialize({
+            languages: [
+                { name: 'English', code: 'en' },
+                { name: 'Greek', code: 'el' }
+            ],
+            translation: translation,
+            options: {
+                renderToStaticMarkup,
+                defaultLanguage: "el"
+            }
+        });
+    }
+
     state = {
         showSideDrawer: false
-    }
+    };
+
 
     sideDrawerToggleHandler = () => {
         this.setState((prevState) => {
@@ -23,6 +45,7 @@ class Layout extends Component {
     }
 
     render() {
+        let languages;
         return (
             <Auxiliary>
                 <ToolBar
@@ -34,6 +57,8 @@ class Layout extends Component {
                     closed={this.sideDrawerClosedHandler} />
                 <main className={classes.Content}>
                     {this.props.children}
+                    <Fields />
+                    <NewField />
                 </main>
             </Auxiliary >
         )
@@ -47,4 +72,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps)(withLocalize(Layout));

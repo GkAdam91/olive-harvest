@@ -14,12 +14,13 @@ import thunk from 'redux-thunk';
 
 //Reducers
 import authReducer from './store/reducers/auth';
-
+import fieldsReducer from './store/reducers/fields';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: null || compose;
 
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    fields: fieldsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
 import './App.css';
+import { LocalizeProvider } from 'react-localize-redux';
 
 class App extends Component {
   render() {
     return (
-     <Layout>
-       
-     </Layout>
+      <LocalizeProvider>
+        <Layout>
+
+        </Layout>
+      </LocalizeProvider>
     );
   }
 }
