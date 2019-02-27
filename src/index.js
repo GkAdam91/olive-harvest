@@ -15,12 +15,14 @@ import thunk from 'redux-thunk';
 //Reducers
 import authReducer from './store/reducers/auth';
 import fieldsReducer from './store/reducers/fields';
+import harvestsReducer from './store/reducers/harvests';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: null || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    fields: fieldsReducer
+    fields: fieldsReducer,
+    harvests: harvestsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

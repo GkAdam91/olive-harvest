@@ -10,5 +10,13 @@
     "logout":[
         "Log Out",
         "Αποσύνδεση"
+    ],
+    "home":[
+        "Home",
+        "Αρχική"
+    ],
+    "harvests":[
+        "Harvests",
+        "Συγκομιδή"
     ]
 }

@@ -168,7 +168,7 @@ export class NewField extends Component {
         }
         return (
             <div className={classes.NewField}>
-                <h4>Enter field Data</h4>
+                <h4>Add new Field</h4>
                 {form}
             </div>
         )

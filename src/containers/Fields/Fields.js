@@ -8,8 +8,14 @@ import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 import Field from './Field/field';
+import Modal from '../../components/UI/Modal/Modal';
+import NewField from './NewField/NewField';
+import Button from '../../components/UI/Button/Button';
 
 class Fields extends Component {
+    state = {
+        showNewFieldModal: false
+    }
 
     componentDidMount() {
         this.props.onFetchFields(/* this.props.token, this.props.userId */);
@@ -18,6 +24,14 @@ class Fields extends Component {
     deleteHandler = (field) => {
         this.props.onDeleteField(field.fieldData);
     }
+
+    addNewFieldShowHandler = () => {
+        this.setState({ showNewFieldModal: true });
+    }
+
+    addNewFieldCancelHandler = () => {
+        this.setState({ showNewFieldModal: false });
+    };
 
     render() {
         let fields = <Spinner />;
@@ -31,7 +45,13 @@ class Fields extends Component {
         }
         return (
             <div>
+                <>
+                <Modal show={this.state.showNewFieldModal} modalClosed={this.addNewFieldCancelHandler}> 
+                    <NewField />
+                </Modal>
                 {fields}
+                <Button btnType='Danger' clicked={this.addNewFieldShowHandler}>Add New Field</Button>
+                </>
             </div>
         )
     }
