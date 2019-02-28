@@ -35,11 +35,11 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DELETE_FIELD_SUCCESS:
             const updatedSt = {
                 loading: false,
-                fields: state.fields.splice(action.fieldId, 1)
+                fields: state.fields.splice(action.id, 1)
             }
             return updateObject(state, updatedSt);
         case actionTypes.DELETE_FIELD_FAIL:
-            return updateObject(state, { loading: true });
+            return updateObject(state, { loading: false });
         default:
             return state;
     }

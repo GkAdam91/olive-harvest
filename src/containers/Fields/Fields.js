@@ -22,7 +22,7 @@ class Fields extends Component {
     }
 
     deleteHandler = (field) => {
-        this.props.onDeleteField(field.fieldData);
+        this.props.onDeleteField(field.id);
     }
 
     addNewFieldShowHandler = () => {
@@ -38,9 +38,9 @@ class Fields extends Component {
         if (!this.props.loading) {
             fields = this.props.fields.map(field => (
                 <Field
-                    clickedDelete={(field) => this.deleteHandler(field)}
+                    clickedDelete={() => this.deleteHandler(field)}
                     fieldData={field.fieldData}
-                    key={field.id} />
+                    key={field.fieldId} />
             ));
         }
         return (

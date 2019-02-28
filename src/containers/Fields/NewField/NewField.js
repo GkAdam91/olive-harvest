@@ -112,6 +112,7 @@ export class NewField extends Component {
         }
         formData['Trees'] = treesElement;
         const field = {
+            fieldId: this.props.fields.length + 1,
             fieldData: formData,
         }
         this.props.onAddField(field, 'Some_Token');
@@ -181,7 +182,8 @@ const mapStateToProps = state => {
         // price: state.burgerBuilder.totalPrice,
         loading: state.fields.loading,
         token: 'state.auth.token',
-        userId: 'state.auth.userId'
+        userId: 'state.auth.userId',
+        fields: state.fields.fields
     }
 }
 

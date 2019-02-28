@@ -22,14 +22,17 @@ export const deleteFieldFail = (error) => {
 }
 
 export const deleteField = (fieldData) => {
-    console.log('Clicked Delete')
+    console.log('Clicked Delete', fieldData)
     return dispatch => {
         dispatch(deleteFieldStart());
-        axios.delete('/fields.json', fieldData)
+        const queryParams = '?orderBy="fieldId"&equalTo="' + fieldData.fieldId + '"';
+        axios.delete('/fields1/' +fieldData+'.json')
             .then(response => {
-                dispatch(deleteFieldSuccess(response.data.name))
+                console.log(response);
+                dispatch(deleteFieldSuccess(fieldData.fieldId))
             })
             .catch(error => {
+                console.log(error);
                 dispatch(deleteFieldFail(error))
             })
     }
@@ -59,9 +62,9 @@ export const addFieldStart = () => {
 export const addField = (fieldData, token) => {
     return dispatch => {
         dispatch(addFieldStart());
-        axios.post('/fields.json', fieldData)
+        axios.post('/fields1.json', fieldData)
             .then(response => {
-                console.log('response.data:', response.data)
+                console.log('fieldData:', fieldData)
                 dispatch(addFieldSuccess(response.data.name, fieldData))
             })
             .catch(error => {
@@ -101,7 +104,7 @@ export const fetchFields = (/*token, userId*/) => {
     return dispatch => {
         dispatch(fetchFieldsStart());
         //const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId+'"';
-        axios.get('/fields.json'/*  + queryParams */)
+        axios.get('/fields1.json'/*  + queryParams */)
             .then(res => {
                 const fetchedFields = [];
                 for (let key in res.data) {
