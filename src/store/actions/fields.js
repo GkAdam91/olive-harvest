@@ -26,7 +26,7 @@ export const deleteField = (fieldData) => {
     return dispatch => {
         dispatch(deleteFieldStart());
         const queryParams = '?orderBy="fieldId"&equalTo="' + fieldData.fieldId + '"';
-        axios.delete('/fields1/' +fieldData+'.json')
+        axios.delete('/fields/' +fieldData+'.json')
             .then(response => {
                 console.log(response);
                 dispatch(deleteFieldSuccess(fieldData.fieldId))
@@ -62,7 +62,7 @@ export const addFieldStart = () => {
 export const addField = (fieldData, token) => {
     return dispatch => {
         dispatch(addFieldStart());
-        axios.post('/fields1.json', fieldData)
+        axios.post('/fields.json', fieldData)
             .then(response => {
                 console.log('fieldData:', fieldData)
                 dispatch(addFieldSuccess(response.data.name, fieldData))
@@ -104,7 +104,7 @@ export const fetchFields = (/*token, userId*/) => {
     return dispatch => {
         dispatch(fetchFieldsStart());
         //const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId+'"';
-        axios.get('/fields1.json'/*  + queryParams */)
+        axios.get('/fields.json'/*  + queryParams */)
             .then(res => {
                 const fetchedFields = [];
                 for (let key in res.data) {

@@ -4,12 +4,16 @@ import Button from '../../../components/UI/Button/Button';
 
 class Field extends Component {
   state = {
-    showDeleteButton: false
+    showDeleteButton: false,
+    showEditButton: false,
+    showHarvestsButton: false
   }
 
-  toggleShowDelete = () => {
-    this.setState((prevState) => {
-      return { showDeleteButton: !prevState.showDeleteButton };
+  toggleShow = () => {
+    this.setState({
+      showDeleteButton: !this.state.showDeleteButton,
+      showEditButton: !this.state.showEditButton,
+      showHarvestsButton: !this.state.showHarvestsButton
     });
   }
 
@@ -50,9 +54,15 @@ class Field extends Component {
     let deleteButton = null;
     if (this.state.showDeleteButton)
       deleteButton = <Button btnType='Danger' style='float: right' clicked={this.props.clickedDelete}>Delete</Button>;
+
+    let harvestsButton = null;
+    if (this.state.showHarvestsButton)
+      harvestsButton = <Button btnType='Success' style='float: right' clicked={this.props.clickedHarvests}>Harvests</Button>;
     return (
       <div className={classes.field}>
-        <p onClick={this.toggleShowDelete}>Field: {fieldOutput} {deleteButton}</p>
+        <p 
+        onClick={this.toggleShow}
+        >Field: {fieldOutput} {deleteButton} {harvestsButton}</p>
       </div>
     )
   }
