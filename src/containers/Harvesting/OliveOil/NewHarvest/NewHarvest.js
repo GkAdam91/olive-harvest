@@ -23,7 +23,7 @@ export class NewHarvest extends Component {
                     elementConfig: {
                         options: []
                     },
-                    value: '',
+                    value: this.props.fieldName,
                     validation: {},
                     valid: true
                 },

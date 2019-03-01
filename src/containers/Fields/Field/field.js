@@ -6,14 +6,18 @@ class Field extends Component {
   state = {
     showDeleteButton: false,
     showEditButton: false,
-    showHarvestsButton: false
+    showHarvestsButton: false,
+    showAddHarvestButton: false,
+    selected: false
   }
 
   toggleShow = () => {
     this.setState({
       showDeleteButton: !this.state.showDeleteButton,
       showEditButton: !this.state.showEditButton,
-      showHarvestsButton: !this.state.showHarvestsButton
+      showHarvestsButton: !this.state.showHarvestsButton,
+      showAddHarvestButton: !this.state.showAddHarvestButton,
+      selected: !this.state.selected
     });
   }
 
@@ -53,16 +57,21 @@ class Field extends Component {
     });
     let deleteButton = null;
     if (this.state.showDeleteButton)
-      deleteButton = <Button btnType='Danger' style='float: right' clicked={this.props.clickedDelete}>Delete</Button>;
+      deleteButton = <Button btnType='Danger' clicked={this.props.clickedDelete}>Delete</Button>;
 
     let harvestsButton = null;
     if (this.state.showHarvestsButton)
-      harvestsButton = <Button btnType='Success' style='float: right' clicked={this.props.clickedHarvests}>Harvests</Button>;
+      harvestsButton = <Button btnType='Success' clicked={this.props.clickedHarvests}>Harvests</Button>;
+
+    let addHarvestButton = null;
+    if (this.state.showAddHarvestButton)
+      addHarvestButton = <Button btnType='Success' clicked={this.props.clickedAddHarvest}>Add new Harvest</Button>;
+
     return (
       <div className={classes.field}>
-        <p 
-        onClick={this.toggleShow}
-        >Field: {fieldOutput} {deleteButton} {harvestsButton}</p>
+        <p
+          onClick={this.toggleShow}
+        >Field: {fieldOutput} {deleteButton} {harvestsButton} {addHarvestButton}</p>
       </div>
     )
   }

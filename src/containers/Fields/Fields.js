@@ -10,15 +10,24 @@ import { connect } from 'react-redux';
 import Field from './Field/field';
 import Modal from '../../components/UI/Modal/Modal';
 import NewField from './NewField/NewField';
+import NewHarvest from '../Harvesting/OliveOil/NewHarvest/NewHarvest';
 import Button from '../../components/UI/Button/Button';
 
 class Fields extends Component {
     state = {
-        showNewFieldModal: false
+        showNewFieldModal: false,
+        showNewHarvestModal: false,
+        addHarvestFieldId: '',
+        addHarvestFieldName: ''
+
     }
 
     componentDidMount() {
         this.props.onFetchFields(/* this.props.token, this.props.userId */);
+    }
+
+    addNewHarvestHandler = (field) => {
+        this.setState({ showNewHarvestModal: true })
     }
 
     deleteHandler = (field) => {
@@ -29,8 +38,11 @@ class Fields extends Component {
         this.setState({ showNewFieldModal: true });
     }
 
-    addNewFieldCancelHandler = () => {
-        this.setState({ showNewFieldModal: false });
+    showModalCancelHandler = () => {
+        this.setState({
+            showNewFieldModal: false,
+            showNewHarvestModal: false
+        });
     };
 
     render() {
@@ -39,18 +51,28 @@ class Fields extends Component {
             fields = this.props.fields.map(field => (
                 <Field
                     clickedDelete={() => this.deleteHandler(field)}
+                    clickedHarvests={}
+                    clickedAddHarvest={}
                     fieldData={field.fieldData}
                     key={field.fieldId} />
             ));
         }
+        let modalComponent = null;
+        if (this.state.showNewFieldModal)
+            modalComponent = <NewField />;
+        else if (this.state.showNewHarvestModal)
+            modalComponent = <NewHarvest
+                fieldId={this.state.addHarvestFieldId}
+                fieldName={this.state.addHarvestFieldName} />;
+
         return (
             <div>
                 <>
-                <Modal show={this.state.showNewFieldModal} modalClosed={this.addNewFieldCancelHandler}> 
-                    <NewField />
-                </Modal>
-                {fields}
-                <Button btnType='Danger' clicked={this.addNewFieldShowHandler}>Add New Field</Button>
+                    <Modal show={this.state.showNewFieldModal || this.state.showNewHarvestModal} modalClosed={this.showModalCancelHandler}>
+                        {modalComponent}
+                    </Modal>
+                    {fields}
+                    <Button btnType='Danger' clicked={this.addNewFieldShowHandler}>Add New Field</Button>
                 </>
             </div>
         )
