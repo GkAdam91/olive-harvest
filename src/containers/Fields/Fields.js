@@ -51,8 +51,8 @@ class Fields extends Component {
             fields = this.props.fields.map(field => (
                 <Field
                     clickedDelete={() => this.deleteHandler(field)}
-                    clickedHarvests={}
-                    clickedAddHarvest={}
+                    // clickedHarvests={}
+                    // clickedAddHarvest={}
                     fieldData={field.fieldData}
                     key={field.fieldId} />
             ));
