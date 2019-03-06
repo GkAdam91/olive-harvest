@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
-import './App.css';
+import './App.module.css';
 import { LocalizeProvider } from 'react-localize-redux';
 
 import WelcomePage from './components/WelcomePage/WelcomePage';

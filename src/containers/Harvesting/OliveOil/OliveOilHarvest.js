@@ -11,62 +11,56 @@ import classes from 'react-table/react-table.css';
 
 export class OliveOilHarvest extends Component {
 
-  componentDidMount() {
-    this.props.onFetchHarvests(this.props.fieldName);
-  }
-
   render() {
-    let harvests = <Spinner />;
+    let harvests = null;
     if (!this.props.loading) {
-      console.log(this.props.harvests)
-      harvests = this.props.harvests.map(harvest => (
-        <p>
-          {harvest.harvestData.fieldName} {harvest.harvestData.harvestDate} {harvest.harvestData.sakia} {harvest.harvestData.sakiaType}
-        </p>
-      ))
+      // console.log(this.props.harvests)
+      harvests = this.props.harvests.filter(harvest => {
+        if (harvest.harvestData.fieldName === this.props.fieldNameToShow) {
+          return harvest;
+        }
+        else {
+          return null
+        }
+      }
+      )
     };
 
-    const data = [{
-      name: 'Roy Agasthyan',
-      age: 26
-    }, {
-      name: 'Sam Thomason',
-      age: 22
-    }, {
-      name: 'Michael Jackson',
-      age: 36
-    }, {
-      name: 'Samuel Roy',
-      age: 56
-    }, {
-      name: 'Rima Soy',
-      age: 28
-    }, {
-      name: 'Suzi Eliamma',
-      age: 28
-    }]
+    if (!this.props.loading) {
+      console.log('Fetched: ', this.props.harvests);
+      console.log('data: ', harvests);
 
-    const columns = [{
-      Header: 'Name',
-      accessor: 'name'
-    }, {
-      Header: 'Age',
-      accessor: 'age'
-    }]
+      const columns = [{
+        Header: 'Field Name',
+        accessor: 'harvestData[fieldName]'
+      }, {
+        Header: 'Date',
+        accessor: 'harvestData[harvestDate]'
+      }, {
+        Header: 'Sakia',
+        accessor: 'harvestData[sakia]'
+      }, {
+        Header: 'Sakia Type',
+        accessor: 'harvestData[sakiaType]'
+      }]
 
-    return (
+      return (
 
-      <ReactTable
-        filterable
-        className={classes.ReactTable}
-        data={data}
-        columns={columns}
-        defaultPageSize={3}
-        pageSizeOptions={[3, 6]}
-      >
-      </ReactTable>
+        <ReactTable
+          filterable
+          className={classes.ReactTable}
+          data={harvests}
+          columns={columns}
+          defaultPageSize={3}
+          pageSizeOptions={[3, 6]}
+        >
+        </ReactTable>
 
-    )
+      )
+    }
+    else {
+      return null;
+    }
   }
 }
 

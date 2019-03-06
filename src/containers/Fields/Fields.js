@@ -12,6 +12,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import NewField from './NewField/NewField';
 import NewHarvest from '../Harvesting/OliveOil/NewHarvest/NewHarvest';
 import Button from '../../components/UI/Button/Button';
+import { OliveOilHarvest } from '../Harvesting/OliveOil/OliveOilHarvest';
 
 class Fields extends Component {
     state = {
@@ -25,14 +26,15 @@ class Fields extends Component {
 
     componentDidMount() {
         this.props.onFetchFields(/* this.props.token, this.props.userId */);
+        this.props.onFetchHarvests();
     }
 
     addNewHarvestHandler = (field) => {
         this.setState({
-             showNewHarvestModal: true,
-             addHarvestFieldId: field.id,
-             addHarvestFieldName: field.fieldData.name
-         })
+            showNewHarvestModal: true,
+            addHarvestFieldId: field.id,
+            addHarvestFieldName: field.fieldData.name
+        })
     }
 
     deleteHandler = (field) => {
@@ -59,16 +61,30 @@ class Fields extends Component {
 
     render() {
         let fields = <Spinner />;
+
         if (!this.props.loading) {
-            fields = this.props.fields.map(field => (
-                <Field
-                    clickedDelete={() => this.deleteHandler(field)}
-                    // clickedHarvests={this.showHarvests}
-                    clickedAddHarvest={() => this.addNewHarvestHandler(field)}
-                    fieldData={field.fieldData}
-                    key={field.fieldId} />
-            ));
+            fields = this.props.fields.map(field => {
+                let harvests = <Spinner />;
+                if (!this.props.harvestsLoading) {
+                    harvests = <OliveOilHarvest
+                        fieldNameToShow={'Μακρυα Λακκα'}
+                    />
+                }
+                return (
+                    <>
+                        <Field
+                            clickedDelete={() => this.deleteHandler(field)}
+                            // clickedHarvests={this.showHarvests}
+                            clickedAddHarvest={() => this.addNewHarvestHandler(field)}
+                            fieldData={field.fieldData}
+                            key={field.fieldId} />
+                        {harvests}
+                    </>
+                )
+            }
+            );
         }
+
         let modalComponent = null;
         if (this.state.showNewFieldModal)
             modalComponent = <NewField />;
@@ -95,6 +111,8 @@ const mapStateToProps = state => {
     return {
         fields: state.fields.fields,
         loading: state.fields.loading,
+        harvestsLoading: state.harvests.loading,
+        harvests: state.harvests.harvests,
         // token: state.auth.token,
         // userId: state.auth.userId
     }
@@ -102,6 +120,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        onFetchHarvests: () => dispatch(actions.fetchHarvests()),
         onFetchFields: (/*token, userId*/) => dispatch(actions.fetchFields(/*token, userId*/)),
         onDeleteField: (data) => dispatch(actions.deleteField(data))
     }

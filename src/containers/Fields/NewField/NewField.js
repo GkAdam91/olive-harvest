@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Button from '../../../components/UI/Button/Button';
-import classes from './NewField.css';
+import classes from './NewField.module.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';

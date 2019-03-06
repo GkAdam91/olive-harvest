@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './field.css'
+import classes from './field.module.css'
 import Button from '../../../components/UI/Button/Button';
 
 class Field extends Component {

@@ -5,7 +5,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import BackDrop from '../../UI/Backdrop/Backdrop';
 import Auxiliary from '../../../hoc/Auxiliary';
 
-import classes from './SideDrawer.css';
+import classes from './SideDrawer.module.css';
 import LanguageToggle from '../../UI/LanguageToggle/languageToggle';
 
 const sideDrawer = (props) => {

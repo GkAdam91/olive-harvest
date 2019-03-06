@@ -4,7 +4,7 @@ import { withLocalize } from "react-localize-redux";
 import elFlag from '../../../assets/images/el.png';
 import enFlag from '../../../assets/images/en.png';
 
-import classes from "./languageToggle.css";
+import classes from "./languageToggle.module.css";
 
 const LanguageToggle = ({ languages, activeLanguage, setActiveLanguage }) => {
   console.log(activeLanguage);

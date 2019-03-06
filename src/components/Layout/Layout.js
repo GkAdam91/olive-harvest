@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Auxiliary from '../../hoc/Auxiliary';
 import ToolBar from '../Navigation/Toolbar/Toolbar'
-import classes from './Layout.css'
+import classes from './Layout.module.css'
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 import { connect } from 'react-redux'
@@ -57,6 +57,7 @@ class Layout extends Component {
                 </main>
             </Auxiliary >
         )
+
     }
 }
 
