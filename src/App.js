@@ -20,6 +20,7 @@ class App extends Component {
       </LocalizeProvider>
     );
   }
+  
 }
 
 export default App;

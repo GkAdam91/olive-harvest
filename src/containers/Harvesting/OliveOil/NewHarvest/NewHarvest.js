@@ -124,9 +124,6 @@ export class NewHarvest extends Component {
         for (let f in this.props.fields) {
             optionsNew.push({ value: this.props.fields[f].fieldData.name, displayValue: this.props.fields[f].fieldData.name });
         }
-        console.log("options: ", optionsNew);
-
-
         this.setState(prevState => ({
             ...prevState,
             fieldForm: {

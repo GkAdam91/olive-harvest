@@ -16,6 +16,7 @@ import Button from '../../components/UI/Button/Button';
 class Fields extends Component {
     state = {
         showNewFieldModal: false,
+        // showHarvests: false,
         showNewHarvestModal: false,
         addHarvestFieldId: '',
         addHarvestFieldName: ''
@@ -27,7 +28,11 @@ class Fields extends Component {
     }
 
     addNewHarvestHandler = (field) => {
-        this.setState({ showNewHarvestModal: true })
+        this.setState({
+             showNewHarvestModal: true,
+             addHarvestFieldId: field.id,
+             addHarvestFieldName: field.fieldData.name
+         })
     }
 
     deleteHandler = (field) => {
@@ -45,14 +50,21 @@ class Fields extends Component {
         });
     };
 
+    // showHarvests = () => {
+    //     this.setState({
+    //         showHarvests: !this.state.showHarvests
+    //     });
+    //     console.log(this.state.showHarvests);
+    // }
+
     render() {
         let fields = <Spinner />;
         if (!this.props.loading) {
             fields = this.props.fields.map(field => (
                 <Field
                     clickedDelete={() => this.deleteHandler(field)}
-                    // clickedHarvests={}
-                    // clickedAddHarvest={}
+                    // clickedHarvests={this.showHarvests}
+                    clickedAddHarvest={() => this.addNewHarvestHandler(field)}
                     fieldData={field.fieldData}
                     key={field.fieldId} />
             ));
