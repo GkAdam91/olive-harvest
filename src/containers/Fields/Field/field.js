@@ -8,7 +8,8 @@ class Field extends Component {
     showEditButton: false,
     showHarvestsButton: false,
     showAddHarvestButton: false,
-    selected: false
+    selected: false,
+    showHarvests: false
   }
 
   toggleShow = () => {
@@ -18,6 +19,12 @@ class Field extends Component {
       showHarvestsButton: !this.state.showHarvestsButton,
       showAddHarvestButton: !this.state.showAddHarvestButton,
       selected: !this.state.selected
+    });
+  }
+
+  toggleHarvests = () => {
+    this.setState({
+      showHarvests: !this.state.showHarvests
     });
   }
 
@@ -61,17 +68,22 @@ class Field extends Component {
 
     let harvestsButton = null;
     if (this.state.showHarvestsButton)
-      harvestsButton = <Button btnType='Success' clicked={this.props.clickedHarvests}>Harvests</Button>;
+      harvestsButton = <Button btnType='Success' clicked={this.toggleHarvests}>Harvests</Button>;
 
     let addHarvestButton = null;
     if (this.state.showAddHarvestButton)
       addHarvestButton = <Button btnType='Success' clicked={this.props.clickedAddHarvest}>Add new Harvest</Button>;
+
+    let harvests = null;
+    if(this.state.showHarvests)
+      harvests = this.props.harvests;
 
     return (
       <div className={classes.field}>
         <p
           onClick={this.toggleShow}
         >Field: {fieldOutput} {deleteButton} {harvestsButton} {addHarvestButton}</p>
+        {harvests}
       </div>
     )
   }

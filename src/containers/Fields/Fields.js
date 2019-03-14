@@ -12,12 +12,12 @@ import Modal from '../../components/UI/Modal/Modal';
 import NewField from './NewField/NewField';
 import NewHarvest from '../Harvesting/OliveOil/NewHarvest/NewHarvest';
 import Button from '../../components/UI/Button/Button';
-import { OliveOilHarvest } from '../Harvesting/OliveOil/OliveOilHarvest';
+import  OliveOilHarvest  from '../Harvesting/OliveOil/OliveOilHarvest';
 
 class Fields extends Component {
     state = {
         showNewFieldModal: false,
-        // showHarvests: false,
+        showHarvests: false,
         showNewHarvestModal: false,
         addHarvestFieldId: '',
         addHarvestFieldName: ''
@@ -52,39 +52,43 @@ class Fields extends Component {
         });
     };
 
-    // showHarvests = () => {
-    //     this.setState({
-    //         showHarvests: !this.state.showHarvests
-    //     });
-    //     console.log(this.state.showHarvests);
-    // }
+    showHarvests = () => {
+        this.setState({
+            showHarvests: !this.state.showHarvests
+        });
+        console.log(this.state.showHarvests);
+    }
+
+    //TODO cleanup ifs
 
     render() {
         let fields = <Spinner />;
 
         if (!this.props.loading) {
             fields = this.props.fields.map(field => {
-                let harvests = <Spinner />;
+                let harvests = null;
                 if (!this.props.harvestsLoading) {
-                    harvests = <OliveOilHarvest
-                        fieldNameToShow={'Μακρυα Λακκα'}
-                    />
+                    if (this.props.harvests) {
+                        console.log("field: ", field);
+                        harvests = <OliveOilHarvest
+                            fieldNameToShow={field.fieldData.name}
+                        />
+                    }
                 }
                 return (
-                    <>
                         <Field
                             clickedDelete={() => this.deleteHandler(field)}
                             // clickedHarvests={this.showHarvests}
                             clickedAddHarvest={() => this.addNewHarvestHandler(field)}
                             fieldData={field.fieldData}
-                            key={field.fieldId} />
-                        {harvests}
-                    </>
+                            key={field.fieldId}
+                            harvests = {harvests} />
                 )
             }
             );
         }
 
+        console.log("fields Comp: ", fields);
         let modalComponent = null;
         if (this.state.showNewFieldModal)
             modalComponent = <NewField />;

@@ -9,12 +9,17 @@ import { connect } from 'react-redux';
 import ReactTable from "react-table";
 import classes from 'react-table/react-table.css';
 
-export class OliveOilHarvest extends Component {
+class OliveOilHarvest extends Component {
+  constructor(props) {
+    super(props);
+
+  }
 
   render() {
     let harvests = null;
-    if (!this.props.loading) {
-      // console.log(this.props.harvests)
+    console.log("this.props.harvests", this.props.harvests);
+    console.log('this.props.loading', this.props.loading);
+    if (this.props.harvests !== undefined) {
       harvests = this.props.harvests.filter(harvest => {
         if (harvest.harvestData.fieldName === this.props.fieldNameToShow) {
           return harvest;
@@ -24,35 +29,34 @@ export class OliveOilHarvest extends Component {
         }
       }
       )
-    };
 
-    if (!this.props.loading) {
       console.log('Fetched: ', this.props.harvests);
       console.log('data: ', harvests);
 
-      const columns = [{
-        Header: 'Field Name',
-        accessor: 'harvestData[fieldName]'
-      }, {
-        Header: 'Date',
-        accessor: 'harvestData[harvestDate]'
-      }, {
-        Header: 'Sakia',
-        accessor: 'harvestData[sakia]'
-      }, {
-        Header: 'Sakia Type',
-        accessor: 'harvestData[sakiaType]'
-      }]
+      const columns = [
+        {
+          Header: 'Field Name',
+          accessor: 'harvestData[fieldName]'
+        }, {
+          Header: 'Date',
+          accessor: 'harvestData[harvestDate]'
+        }, {
+          Header: 'Sakia',
+          accessor: 'harvestData[sakia]'
+        }, {
+          Header: 'Sakia Type',
+          accessor: 'harvestData[sakiaType]'
+        }
+      ]
 
       return (
 
         <ReactTable
-          filterable
-          className={classes.ReactTable}
+          className="-striped -highlight"
           data={harvests}
           columns={columns}
-          defaultPageSize={3}
-          pageSizeOptions={[3, 6]}
+          defaultPageSize={harvests.length}
+          showPagination={false}
         >
         </ReactTable>
 
