@@ -29,7 +29,6 @@ class Field extends Component {
   }
 
   render() {
-    // console.log('props:', this.props)
 
     const fieldData = [];
     let trees = [];
@@ -49,8 +48,11 @@ class Field extends Component {
         });
       }
     }
-    //fieldData.push({name: 'trees', value: trees});
-    // console.log('fieldData:', fieldData)
+    //TODO push each tree value alone
+    fieldData.push({name: trees[0].name, value: trees[0].value});
+    fieldData.push({name: trees[1].name, value: trees[1].value});
+    fieldData.push({name: trees[2].name, value: trees[2].value});
+
     const fieldOutput = fieldData.map(fi => {
       return <span
         style={{
@@ -82,7 +84,8 @@ class Field extends Component {
       <div className={classes.field}>
         <p
           onClick={this.toggleShow}
-        >Field: {fieldOutput} {deleteButton} {harvestsButton} {addHarvestButton}</p>
+        >{fieldOutput}</p>
+         {deleteButton} {harvestsButton} {addHarvestButton}
         {harvests}
       </div>
     )

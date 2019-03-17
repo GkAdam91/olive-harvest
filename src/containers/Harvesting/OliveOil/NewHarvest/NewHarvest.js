@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { updateObject, checkValidity } from '../../../../shared/utility';
 import DatePicker from "react-datepicker";
 
-import classes1 from "react-datepicker/dist/react-datepicker-cssmodules.css";
 
 export class NewHarvest extends Component {
     constructor(props) {

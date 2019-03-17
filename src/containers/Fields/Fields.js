@@ -12,7 +12,8 @@ import Modal from '../../components/UI/Modal/Modal';
 import NewField from './NewField/NewField';
 import NewHarvest from '../Harvesting/OliveOil/NewHarvest/NewHarvest';
 import Button from '../../components/UI/Button/Button';
-import  OliveOilHarvest  from '../Harvesting/OliveOil/OliveOilHarvest';
+import OliveOilHarvest from '../Harvesting/OliveOil/OliveOilHarvest';
+import { classDeclaration } from '@babel/types';
 
 class Fields extends Component {
     state = {
@@ -30,6 +31,7 @@ class Fields extends Component {
     }
 
     addNewHarvestHandler = (field) => {
+
         this.setState({
             showNewHarvestModal: true,
             addHarvestFieldId: field.id,
@@ -38,7 +40,9 @@ class Fields extends Component {
     }
 
     deleteHandler = (field) => {
-        this.props.onDeleteField(field.id);
+        // this.props.onDeleteField(field.id);
+        this.props.onDeleteHarvests(field.fieldData.name);
+        // console.log('field:', field.fieldData.name);
     }
 
     addNewFieldShowHandler = () => {
@@ -56,7 +60,6 @@ class Fields extends Component {
         this.setState({
             showHarvests: !this.state.showHarvests
         });
-        console.log(this.state.showHarvests);
     }
 
     //TODO cleanup ifs
@@ -69,26 +72,26 @@ class Fields extends Component {
                 let harvests = null;
                 if (!this.props.harvestsLoading) {
                     if (this.props.harvests) {
-                        console.log("field: ", field);
+
                         harvests = <OliveOilHarvest
                             fieldNameToShow={field.fieldData.name}
                         />
                     }
                 }
+
                 return (
-                        <Field
-                            clickedDelete={() => this.deleteHandler(field)}
-                            // clickedHarvests={this.showHarvests}
-                            clickedAddHarvest={() => this.addNewHarvestHandler(field)}
-                            fieldData={field.fieldData}
-                            key={field.fieldId}
-                            harvests = {harvests} />
+                    <Field
+                        clickedDelete={() => this.deleteHandler(field)}
+                        // clickedHarvests={this.showHarvests}
+                        clickedAddHarvest={() => this.addNewHarvestHandler(field)}
+                        fieldData={field.fieldData}
+                        key={field.id}
+                        harvests={harvests} />
                 )
             }
             );
         }
 
-        console.log("fields Comp: ", fields);
         let modalComponent = null;
         if (this.state.showNewFieldModal)
             modalComponent = <NewField />;
@@ -126,7 +129,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchHarvests: () => dispatch(actions.fetchHarvests()),
         onFetchFields: (/*token, userId*/) => dispatch(actions.fetchFields(/*token, userId*/)),
-        onDeleteField: (data) => dispatch(actions.deleteField(data))
+        onDeleteField: (data) => dispatch(actions.deleteField(data)),
+        onDeleteHarvests: (data) => dispatch(actions.deleteAllHarvests(data))
     }
 };
 

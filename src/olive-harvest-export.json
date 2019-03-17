@@ -1,0 +1,117 @@
+{
+  "fields" : {
+    "-LZmultuARK6xhBJ93Nl" : {
+      "fieldData" : {
+        "Trees" : {
+          "TreeVariety" : "koroneiki",
+          "noTrees" : "100",
+          "plantYear" : "1990"
+        },
+        "area" : "Αετοφωλιά",
+        "name" : "Κασήμι",
+        "sqArea" : "15"
+      },
+      "fieldId" : 2
+    },
+    "-LZmuqS5MoZ7K0a_Y5qT" : {
+      "fieldData" : {
+        "Trees" : {
+          "TreeVariety" : "koroneiki",
+          "noTrees" : "200",
+          "plantYear" : "2019"
+        },
+        "area" : "Μαργέλι",
+        "name" : "Μακρυα Λάκκα",
+        "sqArea" : "100"
+      },
+      "fieldId" : 3
+    },
+    "-L_sRaJvIFEcbhcsiFEf" : {
+      "fieldData" : {
+        "Trees" : {
+          "TreeVariety" : "koroneiki",
+          "noTrees" : "2200",
+          "plantYear" : "1902"
+        },
+        "area" : "Στερνα",
+        "name" : "Αγιος Γεωργιος",
+        "sqArea" : "1200"
+      },
+      "fieldId" : 3
+    }
+  },
+  "harvests" : {
+    "-L_9B5PPN5KXuGcQIKTy" : {
+      "harvestData" : {
+        "fieldName" : "Μακρυα Λάκκα",
+        "harvestDate" : "Wed Feb 27 2019 21:30:43 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "20",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_9B74leA4maQjcfGTb" : {
+      "harvestData" : {
+        "fieldName" : "Μακρυα Λάκκα",
+        "harvestDate" : "Wed Feb 27 2019 21:30:43 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "20",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_9BAorgq2OHwVIsqVA" : {
+      "harvestData" : {
+        "fieldName" : "Κασήμι",
+        "harvestDate" : "Thu Feb 07 2019 21:30:43 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "30",
+        "sakiaType" : "40kg"
+      }
+    },
+    "-L_sRhNkwsdU_O6F_0YX" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Mon Apr 01 2019 21:06:17 GMT+0300 (Eastern European Summer Time)",
+        "sakia" : "30",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_sRiJ_IrFsNPK3cctY" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Mon Apr 01 2019 21:06:17 GMT+0300 (Eastern European Summer Time)",
+        "sakia" : "30",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_sRieCJ1kP95weh7CF" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Mon Apr 01 2019 21:06:17 GMT+0300 (Eastern European Summer Time)",
+        "sakia" : "30",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_sVWWx7F7SaMBIIOwa" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Wed Mar 13 2019 21:23:01 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "23",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_sVXM9_AHxFdieMyr6" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Wed Mar 13 2019 21:23:01 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "12",
+        "sakiaType" : "50kg"
+      }
+    },
+    "-L_sVY6p5Mq8sChrISgg" : {
+      "harvestData" : {
+        "fieldName" : "Αγιος Γεωργιος",
+        "harvestDate" : "Wed Mar 13 2019 21:23:01 GMT+0200 (Eastern European Standard Time)",
+        "sakia" : "45",
+        "sakiaType" : "50kg"
+      }
+    }
+  }
+}

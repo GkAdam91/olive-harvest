@@ -1,6 +1,42 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
+
+export const deleteAllHarvestsSuccess = (id) => {
+    return {
+        type: actionTypes.DELETE_ALL_HARVESTS_SUCCESS,
+        harvestsIds: id,
+    }
+}
+
+export const deleteAllHarvestsStart = () => {
+    return {
+        type: actionTypes.DELETE_ALL_HARVESTS_START
+    }
+}
+
+export const deleteAllHarvestsFail = (error) => {
+    return {
+        type: actionTypes.DELETE_ALL_HARVESTS_FAIL,
+        error: error
+    }
+}
+
+export const deleteAllHarvests = (harvestsData) => {
+    console.log('harvestsData:', harvestsData);
+    return dispatch => {
+        dispatch(deleteHarvestStart());
+        const queryParams = '?orderBy="fieldName"&equalTo="' + harvestsData+'"';
+        axios.delete('/harvests.json'+queryParams)
+            .then(response => {
+                dispatch(deleteHarvestSuccess(response.data.name))
+            })
+            .catch(error => {
+                dispatch(deleteHarvestFail(error))
+            })
+    }
+}
+
 export const deleteHarvestSuccess = (id) => {
     return {
         type: actionTypes.DELETE_HARVEST_SUCCESS,

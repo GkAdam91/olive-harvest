@@ -6,7 +6,7 @@ import { LocalizeProvider } from 'react-localize-redux';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import Fields from './containers/Fields/Fields';
 import OliveOilHarvest from './containers/Harvesting/OliveOil/OliveOilHarvest';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   render() {

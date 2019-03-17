@@ -112,7 +112,6 @@ export class NewField extends Component {
         }
         formData['Trees'] = treesElement;
         const field = {
-            fieldId: this.props.fields.length + 1,
             fieldData: formData,
         }
         this.props.onAddField(field, 'Some_Token');

@@ -22,17 +22,14 @@ export const deleteFieldFail = (error) => {
 }
 
 export const deleteField = (fieldData) => {
-    console.log('Clicked Delete', fieldData)
     return dispatch => {
         dispatch(deleteFieldStart());
-        const queryParams = '?orderBy="fieldId"&equalTo="' + fieldData.fieldId + '"';
+        //const queryParams = '?orderBy="fieldId"&equalTo="' + fieldData.fieldId + '"';
         axios.delete('/fields/' +fieldData+'.json')
             .then(response => {
-                console.log(response);
                 dispatch(deleteFieldSuccess(fieldData.fieldId))
             })
             .catch(error => {
-                console.log(error);
                 dispatch(deleteFieldFail(error))
             })
     }

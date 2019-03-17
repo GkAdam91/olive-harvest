@@ -7,7 +7,7 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import { connect } from 'react-redux'
 
 import { renderToStaticMarkup } from "react-dom/server";
-import { withLocalize, setActiveLanguage } from 'react-localize-redux';
+import { withLocalize } from 'react-localize-redux';
 import translation from '../../shared/translation.json';
 
 class Layout extends Component {
@@ -42,7 +42,6 @@ class Layout extends Component {
     }
 
     render() {
-        let languages;
         return (
             <Auxiliary>
                 <ToolBar

@@ -32,7 +32,7 @@ const LanguageToggle = ({ languages, activeLanguage, setActiveLanguage }) => {
     // </ul>
     //{console.log(activeLanguage)}
     <div >
-      <img src={srcImg} onClick={onClickFunc} className={classes.Toggle}/>
+      <img src={srcImg} onClick={onClickFunc} className={classes.Toggle} alt='flag'/>
     </div>
   );
 }

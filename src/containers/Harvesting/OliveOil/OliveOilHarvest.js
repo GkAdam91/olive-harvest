@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import axios from '../../../axios-orders';
-import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
 import { connect } from 'react-redux';
 
 import ReactTable from "react-table";
-import classes from 'react-table/react-table.css';
+import  'react-table/react-table.css';
+
 
 class OliveOilHarvest extends Component {
-  constructor(props) {
-    super(props);
-
-  }
+  
+ 
 
   render() {
     let harvests = null;
-    console.log("this.props.harvests", this.props.harvests);
-    console.log('this.props.loading', this.props.loading);
     if (this.props.harvests !== undefined) {
       harvests = this.props.harvests.filter(harvest => {
         if (harvest.harvestData.fieldName === this.props.fieldNameToShow) {
@@ -29,9 +25,6 @@ class OliveOilHarvest extends Component {
         }
       }
       )
-
-      console.log('Fetched: ', this.props.harvests);
-      console.log('data: ', harvests);
 
       const columns = [
         {
