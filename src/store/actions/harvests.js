@@ -22,17 +22,20 @@ export const deleteAllHarvestsFail = (error) => {
     }
 }
 
-export const deleteAllHarvests = (harvestsData) => {
-    console.log('harvestsData:', harvestsData);
+export const deleteAllHarvests = (harvestsData1) => {
+    console.log('harvestsData:', harvestsData1);
     return dispatch => {
-        dispatch(deleteHarvestStart());
-        const queryParams = '?orderBy="fieldName"&equalTo="' + harvestsData+'"';
-        axios.delete('/harvests.json'+queryParams)
+        dispatch(deleteAllHarvestsStart());
+        const queryParams = '?orderBy="harvestData/fieldName"&equalTo="' + harvestsData1+'"';
+        console.log(queryParams);
+        axios.delete('/harvests1.json', {data: {id: {harvestData: {fieldName: 'test'}}}})
             .then(response => {
-                dispatch(deleteHarvestSuccess(response.data.name))
+                dispatch(deleteAllHarvestsSuccess(response.data.name))
+                console.log(response)
             })
             .catch(error => {
-                dispatch(deleteHarvestFail(error))
+                dispatch(deleteAllHarvestsFail(error))
+                console.log('error: ', error)
             })
     }
 }
@@ -57,11 +60,12 @@ export const deleteHarvestFail = (error) => {
     }
 }
 
-export const deleteHarvest = (harvestData) => {
+export const deleteHarvest = (harvestData1) => {
     console.log('Clicked Delete')
     return dispatch => {
+        const queryParams = '"/' + harvestData1 +'"';
         dispatch(deleteHarvestStart());
-        axios.delete('/harvests.json', harvestData)
+        axios.delete('/harvests1.json'+ queryParams)
             .then(response => {
                 dispatch(deleteHarvestSuccess(response.data.name))
             })
@@ -93,11 +97,12 @@ export const addHarvestStart = () => {
 }
 
 export const addHarvest = (harvestData, token) => {
+    
     return dispatch => {
         dispatch(addHarvestStart());
-        axios.post('/harvests.json', harvestData)
+        axios.post('/harvests1.json', harvestData)
             .then(response => {
-                console.log('response.data:', response.data)
+                console.log('response.data:', response)
                 dispatch(addHarvestSuccess(response.data.name, harvestData))
             })
             .catch(error => {
@@ -137,7 +142,7 @@ export const fetchHarvests = (/*token, userId*/) => {
     return dispatch => {
         dispatch(fetchHarvestsStart());
         //const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId+'"';
-        axios.get('/harvests.json'/*  + queryParams */)
+        axios.get('/harvests1.json'/*  + queryParams */)
             .then(res => {
                 const fetchedHarvests = [];
                 for (let key in res.data) {

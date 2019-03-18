@@ -186,7 +186,7 @@ export class NewHarvest extends Component {
                         return (
                             <DatePicker
                                 key={formElement.id}
-                                // className={classes1.react-datepicker}
+                                
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
                             />
