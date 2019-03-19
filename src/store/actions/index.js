@@ -14,8 +14,7 @@ export {
 export {
     fetchHarvests,
     addHarvest,
-    deleteHarvest,
-    deleteAllHarvests
+    deleteHarvest
 } from './harvests'
 
 //This is a changess

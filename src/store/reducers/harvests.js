@@ -39,16 +39,6 @@ const reducer = (state = initialState, action) => {
             return updateObject(state, updatedSt);
         case actionTypes.DELETE_HARVEST_FAIL:
             return updateObject(state, { loading: true });
-        case actionTypes.DELETE_ALL_HARVESTS_START:
-            return updateObject(state, { loading: true });
-        case actionTypes.DELETE_ALL_HARVESTS_SUCCESS:
-            const updatedSta = {
-                loading: false,
-                harvests: state.harvests.splice(action.harvestsIds, 1)
-            }
-            return updateObject(state, updatedSta);
-        case actionTypes.DELETE_ALL_HARVESTS_FAIL:
-            return updateObject(state, { loading: true });
         default:
             return state;
     }

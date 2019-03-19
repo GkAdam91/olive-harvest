@@ -2,43 +2,43 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 
-export const deleteAllHarvestsSuccess = (id) => {
-    return {
-        type: actionTypes.DELETE_ALL_HARVESTS_SUCCESS,
-        harvestsIds: id,
-    }
-}
+// export const deleteAllHarvestsSuccess = (id) => {
+//     return {
+//         type: actionTypes.DELETE_ALL_HARVESTS_SUCCESS,
+//         harvestsIds: id,
+//     }
+// }
 
-export const deleteAllHarvestsStart = () => {
-    return {
-        type: actionTypes.DELETE_ALL_HARVESTS_START
-    }
-}
+// export const deleteAllHarvestsStart = () => {
+//     return {
+//         type: actionTypes.DELETE_ALL_HARVESTS_START
+//     }
+// }
 
-export const deleteAllHarvestsFail = (error) => {
-    return {
-        type: actionTypes.DELETE_ALL_HARVESTS_FAIL,
-        error: error
-    }
-}
+// export const deleteAllHarvestsFail = (error) => {
+//     return {
+//         type: actionTypes.DELETE_ALL_HARVESTS_FAIL,
+//         error: error
+//     }
+// }
 
-export const deleteAllHarvests = (harvestsData1) => {
-    console.log('harvestsData:', harvestsData1);
-    return dispatch => {
-        dispatch(deleteAllHarvestsStart());
-        const queryParams = '?orderBy="harvestData/fieldName"&equalTo="' + harvestsData1+'"';
-        console.log(queryParams);
-        axios.delete('/harvests1.json', {data: {id: {harvestData: {fieldName: 'test'}}}})
-            .then(response => {
-                dispatch(deleteAllHarvestsSuccess(response.data.name))
-                console.log(response)
-            })
-            .catch(error => {
-                dispatch(deleteAllHarvestsFail(error))
-                console.log('error: ', error)
-            })
-    }
-}
+// export const deleteAllHarvests = (harvestsData1) => {
+//     console.log('harvestsData:', harvestsData1);
+//     return dispatch => {
+//         dispatch(deleteAllHarvestsStart());
+//         const queryParams = '?orderBy="harvestData/fieldName"&equalTo="' + harvestsData1+'"';
+//         console.log(queryParams);
+//         axios.delete('/harvests1.json', {params:  {fieldName: 'test'}})
+//             .then(response => {
+//                 dispatch(deleteAllHarvestsSuccess(response.data.name))
+//                 console.log(response)
+//             })
+//             .catch(error => {
+//                 dispatch(deleteAllHarvestsFail(error))
+//                 console.log('error: ', error)
+//             })
+//     }
+// }
 
 export const deleteHarvestSuccess = (id) => {
     return {
@@ -61,11 +61,9 @@ export const deleteHarvestFail = (error) => {
 }
 
 export const deleteHarvest = (harvestData1) => {
-    console.log('Clicked Delete')
     return dispatch => {
-        const queryParams = '"/' + harvestData1 +'"';
         dispatch(deleteHarvestStart());
-        axios.delete('/harvests1.json'+ queryParams)
+        axios.delete('/harvests1/'+ harvestData1+ '.json')
             .then(response => {
                 dispatch(deleteHarvestSuccess(response.data.name))
             })

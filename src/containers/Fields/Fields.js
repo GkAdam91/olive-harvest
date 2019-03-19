@@ -39,10 +39,22 @@ class Fields extends Component {
         })
     }
 
+    deleteAllHarvests = (fieldName) => {
+        console.log('this.props.harvests:', this.props.harvests);
+        let idx;
+        for (idx in this.props.harvests ){
+            if (this.props.harvests[idx]['harvestData']['fieldName'] === fieldName){
+                // console.log('this.props.harvests[idx][id]:', this.props.harvests[idx]['id']);
+                this.props.onDeleteHarvest(this.props.harvests[idx]['id']);
+            }
+            // console.log(this.props.harvests[idx]['harvestData']['fieldName']);
+            
+        }
+    }
+
     deleteHandler = (field) => {
         // this.props.onDeleteField(field.id);
-        this.props.onDeleteHarvests(field.fieldData.name);
-        // console.log('field:', field.fieldData.name);
+        this.deleteAllHarvests(field.fieldData.name);
     }
 
     addNewFieldShowHandler = () => {
@@ -130,7 +142,7 @@ const mapDispatchToProps = dispatch => {
         onFetchHarvests: () => dispatch(actions.fetchHarvests()),
         onFetchFields: (/*token, userId*/) => dispatch(actions.fetchFields(/*token, userId*/)),
         onDeleteField: (data) => dispatch(actions.deleteField(data)),
-        onDeleteHarvests: (data) => dispatch(actions.deleteAllHarvests(data))
+        onDeleteHarvest: (id) => dispatch(actions.deleteHarvest(id))
     }
 };
 

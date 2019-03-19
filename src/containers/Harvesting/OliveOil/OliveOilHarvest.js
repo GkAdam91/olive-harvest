@@ -39,9 +39,24 @@ class OliveOilHarvest extends Component {
         }, {
           Header: 'Sakia Type',
           accessor: 'harvestData[sakiaType]'
+        }, {
+          Header: 'id',
+          accessor: 'id',
+          show: false
         }
-      ]
+      ];
 
+      const onRowClick = (state, rowInfo, column, instance) => {
+        return {
+            onClick: e => {
+                console.log('A Td Element was clicked!')
+                console.log('it produced this event:', e)
+                console.log('It was in this column:', column)
+                console.log('It was in this row:', rowInfo)
+                console.log('It was in this table instance:', instance)
+            }
+        }
+    }
       return (
 
         <ReactTable
@@ -50,6 +65,7 @@ class OliveOilHarvest extends Component {
           columns={columns}
           defaultPageSize={harvests.length}
           showPagination={false}
+          getTdProps={onRowClick}
         >
         </ReactTable>
 
