@@ -6,18 +6,20 @@ import * as actions from '../../../store/actions/index';
 import { connect } from 'react-redux';
 
 import ReactTable from "react-table";
-import  'react-table/react-table.css';
+import 'react-table/react-table.css';
+
+import Button from '../../../components/UI/Button/Button';
 
 
 class OliveOilHarvest extends Component {
-  
  
-
   render() {
+    let selId = null;
     let harvests = null;
     if (this.props.harvests !== undefined) {
       harvests = this.props.harvests.filter(harvest => {
         if (harvest.harvestData.fieldName === this.props.fieldNameToShow) {
+          harvest.selected = false;
           return harvest;
         }
         else {
@@ -26,10 +28,15 @@ class OliveOilHarvest extends Component {
       }
       )
 
+      console.log('harvests:', harvests);
       const columns = [
         {
           Header: 'Field Name',
-          accessor: 'harvestData[fieldName]'
+          accessor: 'harvestData[fieldName]',
+          Footer: (<>
+          <Button btnType='Success' clicked={this.props.clickedEditHarvest(selId)}>Edit</Button>
+          <Button btnType='Danger' clicked={this.props.clickedDeleteHarvest(selId)}>Delete</Button>
+          </>)
         }, {
           Header: 'Date',
           accessor: 'harvestData[harvestDate]'
@@ -46,17 +53,46 @@ class OliveOilHarvest extends Component {
         }
       ];
 
+      const highlightRow = (id) => {
+        let idx;
+        for (idx in harvests) {
+          if (harvests[idx]['id'] === id) {
+            harvests[idx].selected = !harvests[idx].selected;
+            selId = id;
+          }
+          else {
+            harvests[idx].selected = false;
+          }
+        }
+      }
+
       const onRowClick = (state, rowInfo, column, instance) => {
         return {
-            onClick: e => {
-                console.log('A Td Element was clicked!')
-                console.log('it produced this event:', e)
-                console.log('It was in this column:', column)
-                console.log('It was in this row:', rowInfo)
-                console.log('It was in this table instance:', instance)
-            }
+          onClick: e => {
+            // console.log(' this.state:', state)
+            // // console.log('A Td Element was clicked!')
+            // // console.log('it produced this event:', e)
+            // console.log('It was in this column:', column)
+            // console.log('It was in this row:', rowInfo)
+            // // console.log('It was in this table instance:', instance)
+            // console.log('column.id:', column.id);
+            // console.log('column.selected:', column.selected);
+            // console.log('rowInfo.original.id:', rowInfo.original.id);
+            // console.log('rowInfo.index:', rowInfo.index);
+
+            highlightRow(rowInfo.original.id);
+
+            instance.forceUpdate();
+
+          },
+          style: {
+            background:
+              rowInfo.original.selected === true ? "#00afec" : "white",
+            color:
+              rowInfo.original.selected === true ? "white" : "black"
+          }
         }
-    }
+      }
       return (
 
         <ReactTable
@@ -66,6 +102,7 @@ class OliveOilHarvest extends Component {
           defaultPageSize={harvests.length}
           showPagination={false}
           getTdProps={onRowClick}
+          
         >
         </ReactTable>
 

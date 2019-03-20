@@ -10,7 +10,7 @@ import * as actions from '../../../../store/actions/index'
 import { connect } from 'react-redux';
 import { updateObject, checkValidity } from '../../../../shared/utility';
 import DatePicker from "react-datepicker";
-
+import 'react-datepicker/dist/react-datepicker.css';
 
 export class NewHarvest extends Component {
     constructor(props) {
@@ -186,7 +186,7 @@ export class NewHarvest extends Component {
                         return (
                             <DatePicker
                                 key={formElement.id}
-                                
+                                inline
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
                             />
