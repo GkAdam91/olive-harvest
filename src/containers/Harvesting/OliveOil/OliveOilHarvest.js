@@ -14,6 +14,7 @@ import Button from '../../../components/UI/Button/Button';
 class OliveOilHarvest extends Component {
  
   render() {
+    console.log('this.props:', this.props);
     let selId = null;
     let harvests = null;
     if (this.props.harvests !== undefined) {
@@ -34,7 +35,7 @@ class OliveOilHarvest extends Component {
           Header: 'Field Name',
           accessor: 'harvestData[fieldName]',
           Footer: (<>
-          <Button btnType='Success' clicked={this.props.clickedEditHarvest(selId)}>Edit</Button>
+          <Button btnType='Success' clicked={this.props.clickedEditHarvest}>Edit</Button>
           <Button btnType='Danger' clicked={this.props.clickedDeleteHarvest(selId)}>Delete</Button>
           </>)
         }, {
@@ -126,7 +127,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onFetchHarvests: (fieldName) => dispatch(actions.fetchHarvests(fieldName)),
-    onDeleteField: (data) => dispatch(actions.deleteField(data))
+    onDeleteField: (data) => dispatch(actions.deleteField(data)),
+    onDeleteHarvest: (id) => dispatch(actions.deleteHarvest(id))
   }
 };
 

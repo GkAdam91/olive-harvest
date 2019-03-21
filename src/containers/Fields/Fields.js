@@ -45,11 +45,16 @@ class Fields extends Component {
         for (idx in this.props.harvests ){
             if (this.props.harvests[idx]['harvestData']['fieldName'] === fieldName){
                 // console.log('this.props.harvests[idx][id]:', this.props.harvests[idx]['id']);
-                this.props.onDeleteHarvest(this.props.harvests[idx]['id']);
+                this.deleteHarvest(this.props.harvests[idx]['id']);
             }
             // console.log(this.props.harvests[idx]['harvestData']['fieldName']);
             
         }
+    }
+
+    deleteHarvest = (id) => {
+        //this.props.onDeleteHarvest(id);
+        console.log('DELETE! id: ', id)
     }
 
     deleteHandler = (field) => {
@@ -87,6 +92,7 @@ class Fields extends Component {
 
                         harvests = <OliveOilHarvest
                             fieldNameToShow={field.fieldData.name}
+                            clickedDeleteHarvest = {(id) => this.deleteHarvest(id)}
                         />
                     }
                 }
@@ -98,6 +104,7 @@ class Fields extends Component {
                         clickedAddHarvest={() => this.addNewHarvestHandler(field)}
                         fieldData={field.fieldData}
                         key={field.id}
+                        harvestToDel={null}
                         harvests={harvests} />
                 )
             }
