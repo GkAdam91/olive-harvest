@@ -53,7 +53,7 @@ class Fields extends Component {
     }
 
     deleteHarvest = (id) => {
-        //this.props.onDeleteHarvest(id);
+        this.props.onDeleteHarvest(id);
         console.log('DELETE! id: ', id)
     }
 
@@ -92,7 +92,7 @@ class Fields extends Component {
 
                         harvests = <OliveOilHarvest
                             fieldNameToShow={field.fieldData.name}
-                            clickedDeleteHarvest = {(id) => this.deleteHarvest(id)}
+                            clickedDeleteHarvest = {this.deleteHarvest}
                         />
                     }
                 }

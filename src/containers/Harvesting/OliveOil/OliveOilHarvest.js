@@ -36,7 +36,7 @@ class OliveOilHarvest extends Component {
           accessor: 'harvestData[fieldName]',
           Footer: (<>
           <Button btnType='Success' clicked={this.props.clickedEditHarvest}>Edit</Button>
-          <Button btnType='Danger' clicked={this.props.clickedDeleteHarvest(selId)}>Delete</Button>
+          <Button btnType='Danger' clicked={() =>this.props.clickedDeleteHarvest(selId)} >Delete</Button>
           </>)
         }, {
           Header: 'Date',
@@ -59,6 +59,7 @@ class OliveOilHarvest extends Component {
         for (idx in harvests) {
           if (harvests[idx]['id'] === id) {
             harvests[idx].selected = !harvests[idx].selected;
+            // this.props.harvestId = id;
             selId = id;
           }
           else {

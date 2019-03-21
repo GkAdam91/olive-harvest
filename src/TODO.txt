@@ -1,0 +1,4 @@
+Thur-21-03-2019 
+Finished deleting single harvest
+TODO 
+Find out why react-table isnt rerendered 
