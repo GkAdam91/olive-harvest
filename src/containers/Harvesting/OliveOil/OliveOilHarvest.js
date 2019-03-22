@@ -35,8 +35,8 @@ class OliveOilHarvest extends Component {
           Header: 'Field Name',
           accessor: 'harvestData[fieldName]',
           Footer: (<>
-          <Button btnType='Success' clicked={this.props.clickedEditHarvest}>Edit</Button>
-          <Button btnType='Danger' clicked={() =>this.props.clickedDeleteHarvest(selId)} >Delete</Button>
+          <Button btnType='Success' clicked={() => this.props.clickedEditHarvest(selId)}>Edit</Button>
+          <Button btnType='Danger' clicked={() => this.props.clickedDeleteHarvest(selId)} >Delete</Button>
           </>)
         }, {
           Header: 'Date',

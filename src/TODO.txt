@@ -2,6 +2,6 @@ Thur-21-03-2019
 Finished deleting single harvest
 TODO 
 1. Find out why react-table isnt rerendered 
-2. Create Edit Harvest and Edit Field menus
+2. Create Edit Harvest (Done but Date doesnt update) and Edit Field menus
 3. add popup that always asks to delete, edit, add new. (UI Component)
 4. add new

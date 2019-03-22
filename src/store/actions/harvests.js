@@ -40,6 +40,41 @@ import axios from '../../axios-orders';
 //     }
 // }
 
+
+export const updateHarvestSuccess = (id) => {
+    return {
+        type: actionTypes.UPDATE_HARVEST_SUCCESS,
+        harvestId: id,
+    }
+}
+
+export const updateHarvestStart = () => {
+    return {
+        type: actionTypes.UPDATE_HARVEST_START
+    }
+}
+
+export const updateHarvestFail = (error) => {
+    return {
+        type: actionTypes.UPDATE_HARVEST_FAIL,
+        error: error
+    }
+}
+
+export const updateHarvest = (harvestData1, id, token) => {
+    return dispatch => {
+        dispatch(updateHarvestStart());
+        axios.patch('/harvests1/' + id + '.json', harvestData1)
+            .then(response => {
+                dispatch(updateHarvestSuccess(response.data.name))
+            })
+            .catch(error => {
+                dispatch(updateHarvestFail(error))
+            })
+    }
+}
+
+
 export const deleteHarvestSuccess = (id) => {
     return {
         type: actionTypes.DELETE_HARVEST_SUCCESS,

@@ -21,7 +21,9 @@ class Fields extends Component {
         showHarvests: false,
         showNewHarvestModal: false,
         addHarvestFieldId: '',
-        addHarvestFieldName: ''
+        addHarvestFieldName: '',
+        editHarvest: false,
+        editHarvestData: null
 
     }
 
@@ -35,26 +37,27 @@ class Fields extends Component {
         this.setState({
             showNewHarvestModal: true,
             addHarvestFieldId: field.id,
-            addHarvestFieldName: field.fieldData.name
+            addHarvestFieldName: field.fieldData.name,
+            editHarvest: false
         })
     }
 
     deleteAllHarvests = (fieldName) => {
         console.log('this.props.harvests:', this.props.harvests);
         let idx;
-        for (idx in this.props.harvests ){
-            if (this.props.harvests[idx]['harvestData']['fieldName'] === fieldName){
+        for (idx in this.props.harvests) {
+            if (this.props.harvests[idx]['harvestData']['fieldName'] === fieldName) {
                 // console.log('this.props.harvests[idx][id]:', this.props.harvests[idx]['id']);
                 this.deleteHarvest(this.props.harvests[idx]['id']);
             }
             // console.log(this.props.harvests[idx]['harvestData']['fieldName']);
-            
+
         }
     }
 
     deleteHarvest = (id) => {
         this.props.onDeleteHarvest(id);
-        console.log('DELETE! id: ', id)
+
     }
 
     deleteHandler = (field) => {
@@ -62,8 +65,31 @@ class Fields extends Component {
         this.deleteAllHarvests(field.fieldData.name);
     }
 
+    editHarvestHandler = (id) => {
+        console.log('Edit! id: ', id);
+        console.log('this.props.harvests:', this.props.harvests);
+        let editHarvestData;
+        let idx;
+        for (idx in this.props.harvests) {
+            if (this.props.harvests[idx]['id'] === id) {
+                // console.log('this.props.harvests[idx][id]:', this.props.harvests[idx]['id']);
+                editHarvestData = this.props.harvests[idx];
+            }
+            // console.log(this.props.harvests[idx]['harvestData']['fieldName']);
+        }
+        console.log('editHarvestData:', editHarvestData);
+
+        this.setState({
+            showNewHarvestModal: true,
+            editHarvest: true,
+            editHarvestData: editHarvestData
+        });
+    }
+
     addNewFieldShowHandler = () => {
-        this.setState({ showNewFieldModal: true });
+        this.setState({
+            showNewFieldModal: true
+        });
     }
 
     showModalCancelHandler = () => {
@@ -92,7 +118,8 @@ class Fields extends Component {
 
                         harvests = <OliveOilHarvest
                             fieldNameToShow={field.fieldData.name}
-                            clickedDeleteHarvest = {this.deleteHarvest}
+                            clickedDeleteHarvest={this.deleteHarvest}
+                            clickedEditHarvest={this.editHarvestHandler}
                         />
                     }
                 }
@@ -117,7 +144,9 @@ class Fields extends Component {
         else if (this.state.showNewHarvestModal)
             modalComponent = <NewHarvest
                 fieldId={this.state.addHarvestFieldId}
-                fieldName={this.state.addHarvestFieldName} />;
+                fieldName={this.state.addHarvestFieldName}
+                edit={this.state.editHarvest}
+                data={this.state.editHarvestData} />;
 
         return (
             <div>

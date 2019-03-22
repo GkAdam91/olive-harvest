@@ -111,14 +111,25 @@ export class NewHarvest extends Component {
                     ...prevState.fieldForm.harvestDate,
                     value: date.toString(),
                     valid: true
-                }
+                },
             }
         }));
-        this.setState({startDate: date});
+        this.setState({ startDate: date });
     }
 
     componentDidMount = () => {
-        this.props.onFetchFields(/* this.props.token, this.props.userId */);
+        console.log('mounted')
+        // this.props.onFetchFields(/* this.props.token, this.props.userId */);
+        if (this.props.edit) {
+            this.editHarvest();
+        }
+        else {
+            this.newHarvest();
+        }
+    }
+
+    newHarvest = () => {
+        console.log('new');
         const optionsNew = [];
         for (let f in this.props.fields) {
             optionsNew.push({ value: this.props.fields[f].fieldData.name, displayValue: this.props.fields[f].fieldData.name });
@@ -134,10 +145,43 @@ export class NewHarvest extends Component {
                         options: optionsNew
                     }
                 }
-            }
+            },
         }));
     }
 
+    editHarvest = () => {
+        console.log('edit');
+        const optionsNew = [];
+        for (let f in this.props.fields) {
+            optionsNew.push({ value: this.props.fields[f].fieldData.name, displayValue: this.props.fields[f].fieldData.name });
+        }
+        this.setState(prevState => ({
+            ...prevState,
+            fieldForm: {
+                ...prevState.fieldForm,
+                fieldName: {
+                    ...prevState.fieldForm.fieldName,
+                    elementConfig: {
+                        ...prevState.fieldForm.fieldName.elementConfig,
+                        options: optionsNew
+                    },
+                    value: this.props.data.harvestData.fieldName
+                },
+                sakiaType: {
+                    ...prevState.fieldForm.sakiaType,
+                    value: this.props.data.harvestData.sakiaType,
+                    valid: true
+                },
+                sakia: {
+                    ...prevState.fieldForm.sakia,
+                    value: this.props.data.harvestData.sakia,
+                    valid: true
+                }
+            },
+            startDate: new Date(this.props.data.harvestData.harvestDate)
+        }));
+
+    }
     inputChangedHandler = (event, inputIdentifier) => {
 
         const updateFormElement = updateObject(this.state.fieldForm[inputIdentifier], {
@@ -167,7 +211,13 @@ export class NewHarvest extends Component {
         const harvest = {
             harvestData: formData,
         }
-        this.props.onAddHarvest(harvest, 'Some_Token');
+        if (this.props.edit) {
+            console.log('edit');
+            this.props.onEditHarvest(harvest, this.props.data.id, 'Some_Token');
+        }
+        else {
+            this.props.onAddHarvest(harvest, 'Some_Token');
+        }
     }
 
     render() {
@@ -239,7 +289,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchFields: (/*token, userId*/) => dispatch(actions.fetchFields(/*token, userId*/)),
-        onAddHarvest: (fieldData, token) => dispatch(actions.addHarvest(fieldData, token))
+        onAddHarvest: (fieldData, token) => dispatch(actions.addHarvest(fieldData, token)),
+        onEditHarvest: (harvestData, id, token) => dispatch(actions.updateHarvest(harvestData, id, token))
     };
 };
 
