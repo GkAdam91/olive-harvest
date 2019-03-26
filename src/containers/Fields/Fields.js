@@ -13,7 +13,6 @@ import NewField from './NewField/NewField';
 import NewHarvest from '../Harvesting/OliveOil/NewHarvest/NewHarvest';
 import Button from '../../components/UI/Button/Button';
 import OliveOilHarvest from '../Harvesting/OliveOil/OliveOilHarvest';
-import { classDeclaration } from '@babel/types';
 
 class Fields extends Component {
     state = {

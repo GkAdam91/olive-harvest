@@ -9,7 +9,7 @@ import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index'
 import { connect } from 'react-redux';
 import { updateObject, checkValidity } from '../../../shared/utility';
-
+import Confirm from '../../../components/UI/Confirm/Confirm';
 
 export class NewField extends Component {
     state = {
@@ -98,7 +98,7 @@ export class NewField extends Component {
 
 
     addFieldHandler = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const formData = {};
         let treesElement = {};
         for (let formElementIdentifier in this.state.fieldForm) {
@@ -147,7 +147,9 @@ export class NewField extends Component {
         };
 
         let form = (
-            <form onSubmit={this.addFieldHandler}>
+            <Confirm title='Test' description='Test Confirmation'>
+            {confirm => (
+            <form onSubmit={confirm(this.addFieldHandler)}>
                 {formElementsArray.map(formElement => (
                     <Input
                         key={formElement.id}
@@ -161,6 +163,8 @@ export class NewField extends Component {
                 ))}
                 <Button btnType='Success' disabled={!this.state.formIsValid} >Add</Button>
             </form>
+             )}
+             </Confirm>
         );
 
         if (this.props.loading) {

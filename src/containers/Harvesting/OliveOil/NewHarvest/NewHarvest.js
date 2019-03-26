@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { updateObject, checkValidity } from '../../../../shared/utility';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment'
+import Confirm from '../../../../components/UI/Confirm/Confirm';
 
 export class NewHarvest extends Component {
     constructor(props) {
@@ -92,7 +94,7 @@ export class NewHarvest extends Component {
                         isNumeric: true
                     },
                     valid: true,
-                    touched: false
+                    touched: true
                 }
             },
             formIsValid: false,
@@ -176,12 +178,19 @@ export class NewHarvest extends Component {
                     ...prevState.fieldForm.sakia,
                     value: this.props.data.harvestData.sakia,
                     valid: true
+                },
+                harvestDate: {
+                    ...prevState.fieldForm.harvestDate,
+                    value: new Date(this.props.data.harvestData.harvestDate)
                 }
             },
             startDate: new Date(this.props.data.harvestData.harvestDate)
         }));
 
     }
+
+    handleChangeRaw = (date) => { date.currentTarget.value = moment(this.props.input.value).format("DD/MM/YYYY"); }
+
     inputChangedHandler = (event, inputIdentifier) => {
 
         const updateFormElement = updateObject(this.state.fieldForm[inputIdentifier], {
@@ -203,7 +212,7 @@ export class NewHarvest extends Component {
     }
 
     addHarvestHandler = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const formData = {};
         for (let formElementIdentifier in this.state.fieldForm) {
             formData[formElementIdentifier] = this.state.fieldForm[formElementIdentifier].value;
@@ -230,7 +239,9 @@ export class NewHarvest extends Component {
         };
 
         let form = (
-            <form onSubmit={this.addHarvestHandler}>
+            <Confirm title='Test' description='Test Confirmation'>
+            {confirm => (
+            <form onSubmit={confirm(this.addHarvestHandler)}>
                 {formElementsArray.map(formElement => {
                     if (formElement.id === 'harvestDate') {
                         return (
@@ -239,6 +250,8 @@ export class NewHarvest extends Component {
                                 inline
                                 selected={this.state.startDate}
                                 onChange={this.handleChange}
+                                onChangeRaw={(e) => this.handleChangeRaw(e)}
+
                             />
                         )
                     }
@@ -261,6 +274,8 @@ export class NewHarvest extends Component {
                     <Button btnType='Success' disabled={!this.state.formIsValid} >Add</Button>
                 </p>
             </form>
+            )}
+            </Confirm>
         );
 
         if (this.props.loading) {
@@ -270,6 +285,7 @@ export class NewHarvest extends Component {
             <div className={classes.NewField}>
                 <h4>Add new Harvest</h4>
                 {form}
+
             </div>
         )
     }
