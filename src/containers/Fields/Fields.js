@@ -6,6 +6,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import { Translate } from 'react-localize-redux';
 
 import Field from './Field/field';
 import Modal from '../../components/UI/Modal/Modal';
@@ -154,7 +155,7 @@ class Fields extends Component {
                         {modalComponent}
                     </Modal>
                     {fields}
-                    <Button btnType='Danger' clicked={this.addNewFieldShowHandler}>Add New Field</Button>
+                    <Button btnType='Danger' clicked={this.addNewFieldShowHandler}><Translate id="addNewField" /></Button>
                 </>
             </div>
         )

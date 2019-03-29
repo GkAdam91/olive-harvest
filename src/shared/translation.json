@@ -18,5 +18,41 @@
     "harvests":[
         "Harvests",
         "Συγκομιδή"
+    ],
+    "addNewField":[
+        "Add new field",
+        "Προσθήκη νέου κτήματος"
+    ],
+    "addNewHarvest":[
+        "Add new Harvest",
+        "Προσθήκη νέας συγκομιδής"
+    ],
+    "edit":[
+        "Edit",
+        "Επεξεργασία"
+    ],
+    "delete":[
+        "Delete",
+        "Διαγραφή"
+    ],
+    "fieldName":[
+        "Field Name",
+        "Όνομα Κτήματος"
+    ],
+    "date":[
+        "Date",
+        "Ημερομηνία"
+    ],
+    "sakia":[
+        "Units",
+        "Σακιά/Τελάρα"
+    ],
+    "sakiaType":[
+        "Unit Type",
+        "Τύποι Σακιών"
+    ],
+    "add":[
+        "Add",
+        "Προσθήκη"
     ]
 }

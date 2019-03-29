@@ -13,6 +13,8 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment'
 import Confirm from '../../../../components/UI/Confirm/Confirm';
+import { Translate } from 'react-localize-redux';
+
 
 export class NewHarvest extends Component {
     constructor(props) {
@@ -271,7 +273,7 @@ export class NewHarvest extends Component {
                 }
                 )}
                 <p>
-                    <Button btnType='Success' disabled={!this.state.formIsValid} >Add</Button>
+                    <Button btnType='Success' disabled={!this.state.formIsValid} ><Translate id="add" /></Button>
                 </p>
             </form>
             )}
@@ -283,7 +285,7 @@ export class NewHarvest extends Component {
         }
         return (
             <div className={classes.NewField}>
-                <h4>Add new Harvest</h4>
+                <h4><Translate id="addNewHarvest" /></h4>
                 {form}
 
             </div>

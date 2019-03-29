@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classes from './field.module.css'
 import Button from '../../../components/UI/Button/Button';
+import { Translate } from 'react-localize-redux';
+
 
 class Field extends Component {
   state = {
@@ -66,15 +68,15 @@ class Field extends Component {
     });
     let deleteButton = null;
     if (this.state.showDeleteButton)
-      deleteButton = <Button btnType='Danger' clicked={this.props.clickedDelete}>Delete</Button>;
+      deleteButton = <Button btnType='Danger' clicked={this.props.clickedDelete}><Translate id="delete" /></Button>;
 
     let harvestsButton = null;
     if (this.state.showHarvestsButton)
-      harvestsButton = <Button btnType='Success' clicked={this.toggleHarvests}>Harvests</Button>;
+      harvestsButton = <Button btnType='Success' clicked={this.toggleHarvests}><Translate id="harvests" /></Button>;
 
     let addHarvestButton = null;
     if (this.state.showAddHarvestButton)
-      addHarvestButton = <Button btnType='Success' clicked={this.props.clickedAddHarvest}>Add new Harvest</Button>;
+      addHarvestButton = <Button btnType='Success' clicked={this.props.clickedAddHarvest}><Translate id="addNewHarvest" /></Button>;
 
     let harvests = null;
     if(this.state.showHarvests)

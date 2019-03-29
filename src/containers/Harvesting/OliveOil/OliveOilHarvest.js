@@ -9,6 +9,7 @@ import ReactTable from "react-table";
 import 'react-table/react-table.css';
 
 import Button from '../../../components/UI/Button/Button';
+import { Translate } from 'react-localize-redux';
 
 
 class OliveOilHarvest extends Component {
@@ -32,20 +33,20 @@ class OliveOilHarvest extends Component {
       console.log('harvests:', harvests);
       const columns = [
         {
-          Header: 'Field Name',
+          Header: <Translate id="fieldName" />,
           accessor: 'harvestData[fieldName]',
           Footer: (<>
-          <Button btnType='Success' clicked={() => this.props.clickedEditHarvest(selId)}>Edit</Button>
-          <Button btnType='Danger' clicked={() => this.props.clickedDeleteHarvest(selId)} >Delete</Button>
+          <Button btnType='Success' clicked={() => this.props.clickedEditHarvest(selId)}><Translate id="edit" /></Button>
+          <Button btnType='Danger' clicked={() => this.props.clickedDeleteHarvest(selId)} ><Translate id="delete" /></Button>
           </>)
         }, {
-          Header: 'Date',
+          Header: <Translate id="date" />,
           accessor: 'harvestData[harvestDate]'
         }, {
-          Header: 'Sakia',
+          Header: <Translate id="sakia" />,
           accessor: 'harvestData[sakia]'
         }, {
-          Header: 'Sakia Type',
+          Header: <Translate id="sakiaType" />,
           accessor: 'harvestData[sakiaType]'
         }, {
           Header: 'id',
